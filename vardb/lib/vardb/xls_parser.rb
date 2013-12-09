@@ -1,3 +1,5 @@
+require 'roo'
+
 module XlsParser
     ## A few rules about Excel files:
     ## 1. .xls only, this can't accept .xlsx

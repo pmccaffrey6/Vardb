@@ -8,7 +8,7 @@ class Vardb
 	include ConfigData
 
 	def self.set_connection(connection_hash)
-		ConfigData.set_connection
+		ConfigData.set_connection(connection_hash)
 	end
 
 	def self.set_metadata(file)

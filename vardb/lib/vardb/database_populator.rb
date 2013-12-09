@@ -1,7 +1,12 @@
-module Populator
-  def populate_database
+require_relative 'xls_parser'
+require 'pg'
 
-	host = ConfigData::host
+module Populator
+  include XlsParser
+
+  def populate
+
+	host = ConfigData.get_connection
 
 	conn = PGconn.connect(:host => host[:host], :port => host[:port], :dbname => host[:dbname], :user => host[:user], :password => host[:password])
 	#Matrix File Command Preparation
@@ -11,7 +16,7 @@ module Populator
 	conn.prepare('load_samples', 'INSERT INTO samples (id, name) values ($1, $2)')
 
 	#Excel Spreadsheet Command Preparaton
-	metadata_fields = XlsParser.load_meta_fields(ConfigData::metadata_file)
+	metadata_fields = XlsParser.load_meta_fields(ConfigData.get_metadata)
 
 	metadata_fields_string = "id "
 
@@ -28,7 +33,7 @@ module Populator
 	conn.prepare('load_metadata', "INSERT INTO sample_metadata (#{metadata_fields_string}) values (#{metadata_values_string})")
 
 	#Matrix File Load-ins
-	text=File.open(ConfigData::matrix_file).read
+	text=File.open(ConfigData.get_matrix).read
 
 	linenum = 1
 	sample_number = 1
@@ -79,7 +84,7 @@ module Populator
 	end
 
 	#Excel Spreadsheet Load-ins
-	s = Roo::Excel.new(ConfigData::metadata_file)
+	s = Roo::Excel.new(ConfigData.get_metadata)
 	s.default_sheet = s.sheets.first
 
 	row = 2

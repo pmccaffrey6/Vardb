@@ -1,9 +1,12 @@
+require_relative 'xls_parser'
+require 'pg'
+
 module Builder
+	include XlsParser
+	def format
+		host = ConfigData.get_connection
 
-	def format_database
-		host = ConfigData::host
-
-		metadata_fields = XlsParser.load_meta_fields(ConfigData::metadata_file)
+		metadata_fields = XlsParser.load_meta_fields(ConfigData.get_metadata)
 
 		metadata_field_names = ""
 
