@@ -4,33 +4,17 @@ require 'pg'
 module Populator
   include XlsParser
 
-  def populate
+  def populate_matrix
 
 	host = ConfigData.get_connection
 
 	conn = PGconn.connect(:host => host[:host], :port => host[:port], :dbname => host[:dbname], :user => host[:user], :password => host[:password])
+	
 	#Matrix File Command Preparation
 	conn.prepare('load_snps', 'INSERT INTO snps (id, locus, annotation_id) values ($1, $2, $3)')
 	conn.prepare('load_annos', 'INSERT INTO annotations (id, cds, transcript, transcript_id, info, orientation, cds_locus, codon_pos, codon, peptide, amino_a, syn ) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)')
 	conn.prepare('load_samples_snps', 'INSERT INTO samples_snps (sample_id, snp_id) values ($1, $2)')
 	conn.prepare('load_samples', 'INSERT INTO samples (id, name) values ($1, $2)')
-
-	#Excel Spreadsheet Command Preparaton
-	metadata_fields = XlsParser.load_meta_fields(ConfigData.get_metadata)
-
-	metadata_fields_string = "id "
-
-	metadata_fields.each do |item|
-		metadata_fields_string << item
-	end
-
-	metadata_values_string = "$1 "
-
-	metadata_fields.length.times do |i|
-    	metadata_values_string << ", $#{i+2}"
-	end
-
-	conn.prepare('load_metadata', "INSERT INTO sample_metadata (#{metadata_fields_string}) values (#{metadata_values_string})")
 
 	#Matrix File Load-ins
 	text=File.open(ConfigData.get_matrix).read
@@ -82,6 +66,30 @@ module Populator
 		end
     	linenum += 1
 	end
+  end	
+
+  def populate_metadata
+
+  	host = ConfigData.get_connection
+
+	conn = PGconn.connect(:host => host[:host], :port => host[:port], :dbname => host[:dbname], :user => host[:user], :password => host[:password])
+
+	#Excel Spreadsheet Command Preparaton
+	metadata_fields = XlsParser.load_meta_fields(ConfigData.get_metadata)
+
+	metadata_fields_string = "id "
+
+	metadata_fields.each do |item|
+		metadata_fields_string << item
+	end
+
+	metadata_values_string = "$1 "
+
+	metadata_fields.length.times do |i|
+    	metadata_values_string << ", $#{i+2}"
+	end
+
+	conn.prepare('load_metadata', "INSERT INTO sample_metadata (#{metadata_fields_string}) values (#{metadata_values_string})")
 
 	#Excel Spreadsheet Load-ins
 	s = Roo::Excel.new(ConfigData.get_metadata)

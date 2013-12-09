@@ -3,17 +3,8 @@ require 'pg'
 
 module Builder
 	include XlsParser
-	def format
+	def format_matrix
 		host = ConfigData.get_connection
-
-		metadata_fields = XlsParser.load_meta_fields(ConfigData.get_metadata)
-
-		metadata_field_names = ""
-
-		metadata_fields.each do |name|
-			name << " varchar(128)"
-			metadata_field_names << name
-		end
 
 		conn = PGconn.connect(:host => host[:host], :port => host[:port], :dbname => host[:dbname], :user => host[:user], :password => host[:password])
 
@@ -28,8 +19,23 @@ module Builder
 
 		puts "formatting samples_snps join table..."
 		conn.exec("CREATE TABLE samples_snps (sample_id numeric(11), snp_id numeric(11))")
+	end
 
-		puts "formatting sample data table..."
+	def format_metadata
+		host = ConfigData.get_connection
+
+		conn = PGconn.connect(:host => host[:host], :port => host[:port], :dbname => host[:dbname], :user => host[:user], :password => host[:password])
+
+		metadata_fields = XlsParser.load_meta_fields(ConfigData.get_metadata)
+
+		metadata_field_names = ""
+
+		metadata_fields.each do |name|
+			name << " varchar(128)"
+			metadata_field_names << name
+		end
+
+		puts "formatting sample metadata table..."
 		conn.exec("CREATE TABLE sample_metadata (id numeric (11) PRIMARY KEY#{metadata_field_names})")
 	end
 end
