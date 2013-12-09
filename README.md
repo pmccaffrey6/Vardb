@@ -11,7 +11,12 @@ This gem exists to create PostgreSQL databases from .matrix files and associated
 4. It's best to avoid characters like "(", ")", "-" and whitespace in column names 
 5. The gem loads the first sheet only so if you have a workbook of sheets they need to be broken out into separate .xls files or merged into one table.
 
-##Example Usage
+##Installation:
+```ruby
+gem install vardb
+```
+
+##Usage:
 ###Give Vardb your Database connection details
 ```ruby
 db = Vardb.new
