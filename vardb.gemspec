@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
 	s.description	=	"This gem builds PostgreSQL databases from .matrix files and metadata spreadsheets"
 	s.author	=	["Peter McCaffrey"]
 	s.email	=	["peter@accetia.com"]
-	s.files	=	["lib/vardb.rb", "lib/vardb/snp_db_build.rb", "lib/vardb/database_populator.rb", "lib/vardb/xls_parser.rb", "lib/vardb/snpscript_configdata.rb"]
+	s.files	=	["lib/vardb.rb", "lib/vardb/snp_db_build.rb", "lib/vardb/database_populator.rb", "lib/vardb/xls_parser.rb", "lib/vardb/snpscript_configdata.rb", "lib/vardb/test_association.rb"]
 	s.homepage	=	''
 	s.license	=	''
 

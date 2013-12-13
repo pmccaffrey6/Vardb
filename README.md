@@ -17,6 +17,7 @@ gem install vardb
 ```
 
 ##Usage:
+##1. Database Construction
 ###Give Vardb your Database connection details
 ```ruby
 db = Vardb.new
@@ -58,3 +59,16 @@ db.populate_metadata
 
 ##….And that's all!
 ###Now you have a PostgreSQL database from your files
+
+##2. Analysis (this is in early development)
+###Test your database for snp/phenotype associations
+The ```ruby test_association ``` method accepts 4 parameters:
+1. snps []: an array of snps
+2. phenotype: hash where the keys and values represent phenotypes. These are determined by the columns anv values in your metadata spreadsheet. Say you have a column called "penicillinresistance" and the values in that column's cells were things like "susceptible" or "resistant". An appropriate phenotype hash to test for an association would therefore be ```ruby :penicillinresistance => 'resistant' ```
+3. minimum support: this is the minimum cutoff for the frequeny of the association amongst the whole pool of samples
+4. minimum confidence: this is the minimum cutoff for the confidence of the relationship
+
+```ruby
+db.test_association([1, 2, 5674, 272, 98790], {:penicillinresistance => 'resistant'}, 0.4, 0.5)
+```
+
