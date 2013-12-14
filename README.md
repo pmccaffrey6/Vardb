@@ -62,6 +62,10 @@ db.populate_metadata
 
 ##2. Analysis (this is in early development)
 ###Test your database for snp/phenotype associations
+With the parameters described below, this method iteratively submits every possible combination of snps and phenotypes provided to a test for significant association. To do so, it simply calculates two things: the **association support** and **association confidence** for a given snp/phenotype association rule. A great article explaining this can be found <a href="http://www-users.cs.umn.edu/~kumar/dmbook/ch6.pdf">here</a>. 
+
+An association's **support** is simply the number of samples with BOTH the snp AND the phenotype divided by the total number of samples. An association's **confidence** is simply the number of samples that have BOTH the snp AND the phenotype (as above) divided by the number of samples that have the snp. And that's it. If those calculations both pass the specified minimum cutoffs provided (see below), then the association rule is flagged and returned as a result.
+
 The ```test_association ``` method accepts 4 parameters:
 
 1. snps [ ]: an array of snps
