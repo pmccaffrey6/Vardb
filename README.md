@@ -65,7 +65,7 @@ db.populate_metadata
 The ```test_association ``` method accepts 4 parameters:
 
 1. snps [ ]: an array of snps
-2. phenotype: hash where the keys and values represent phenotypes. These are determined by the columns anv values in your metadata spreadsheet. Say you have a column called "penicillinresistance" and the values in that column's cells were things like "susceptible" or "resistant". An appropriate phenotype hash to test for an association would therefore be ```:penicillinresistance => 'resistant' ```
+2. phenotype: hash where the keys and values represent phenotypes. These are determined by the columns and values in your metadata spreadsheet. Say you have a column called "penicillinresistance" and the values in that column's cells were things like "susceptible" or "resistant". An appropriate phenotype hash to test for an association would therefore be ```:penicillinresistance => 'resistant' ```
 3. minimum support: this is the minimum cutoff for the frequeny of the association amongst the whole pool of samples
 4. minimum confidence: this is the minimum cutoff for the confidence of the relationship
 
@@ -81,7 +81,7 @@ The output from this command is a hash of significant associations. The format o
 like so:
 
 ``` ruby
-[16, penicillinresistant, resistant] => [ 0.544, 0.672]
+[16, penicillinresistance, resistant] => [ 0.544, 0.672]
 ```
 
 Thus, the results can be parsed as needed. Just one thing to point out from above, this method both accepts and outputs snp_id's not snp loci.
