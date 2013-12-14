@@ -73,3 +73,17 @@ The ```test_association ``` method accepts 4 parameters:
 db.test_association([1, 2, 5674, 272, 98790], {:penicillinresistance => 'resistant'}, 0.4, 0.5)
 ```
 
+The output from this command is a hash of significant associations. The format of this hash is as follows:
+```ruby
+[snp_id, phenotype_key, phenotype_value] => [ calculated_support, calculated_confidence]
+```
+
+like so:
+
+``` ruby
+[16, penicillinresistant, resistant] => [ 0.544, 0.672]
+```
+
+Thus, the results can be parsed as needed. Just one thing to point out from above, this method both accepts and outputs snp_id's not snp loci.
+
+
