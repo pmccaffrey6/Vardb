@@ -81,7 +81,7 @@ The output from this command is a hash of significant associations. The format o
 like so:
 
 ``` ruby
-[16, penicillinresistance, resistant] => [ 0.544, 0.672]
+["16", "penicillinresistance", "resistant"] => [ "0.544", "0.672"]
 ```
 
 Thus, the results can be parsed as needed. Just one thing to point out from above, this method both accepts and outputs snp_id's not snp loci.
