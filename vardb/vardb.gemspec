@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
 	s.name	=	'vardb'
-	s.version	=	'0.0.1'
+	s.version	=	'0.0.2'
 	s.summary	=	"Variant database builder"
 	s.description	=	"This gem builds PostgreSQL databases from .matrix files and metadata spreadsheets"
 	s.author	=	["Peter McCaffrey"]
@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
 	#specify dependencies
 	s.add_runtime_dependency "pg", "~> 0.17.0"
 	s.add_runtime_dependency "roo", "~> 1.13.0"
+	s.add_runtime_dependency "sqlite3", "~> 1.3.7"
 end

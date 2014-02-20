@@ -24,7 +24,7 @@ module XlsParser
 		    if s.cell(1, counter).nil?
 		    	metadata_fields << ", empty#{counter}"
 		    else 
-  			    metadata_fields << ", #{s.cell(1, counter).gsub(/\s+/, "").gsub("-","").gsub("(","").gsub(")","").gsub(".","").gsub("/","")}"
+  			    metadata_fields << ", #{s.cell(1, counter).to_s.gsub(/\s+/, "").gsub("-","").gsub("(","").gsub(")","").gsub(".","").gsub("/","")}"
   			end
   			counter += 1
 		end
