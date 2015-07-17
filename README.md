@@ -38,23 +38,27 @@ db.set_metadata('/Users/username/metadata.xls')
 ```                                          
 
 ###Build a Schema from the .matrix file
+#####This takes one argument for database type: 'pg' for PostgreSQL or 'sqlite'
 ```ruby
-db.format_matrix
+db.format_matrix('pg')
 ```                     
 
-###Populate the database form your .matrix file                     
+###Populate the database form your .matrix file 
+#####This takes one argument for database type: 'pg' for PostgreSQL or 'sqlite'
 ```ruby
-db.populate_matrix
+db.populate_matrix('pg')
 ```
 
 ###Build a Schema from your spreadsheet
+#####This takes one argument for database type: 'pg' for PostgreSQL or 'sqlite'
 ```ruby
-db.format_metadata
+db.format_metadata('pg')
 ```
                      
 ###Populate the database from your spreadsheet
+#####This takes one argument for database type: 'pg' for PostgreSQL or 'sqlite'
 ```ruby
-db.populate_metadata
+db.populate_metadata('pg')
 ```
 
 ##….And that's all!
